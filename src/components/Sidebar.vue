@@ -27,7 +27,7 @@
               <td>{{ key }}</td>
               <td>${{ getPrice(key) }}</td>
               <td class="center">{{ quantity }}</td>
-              <td>${{ quantity * getPrice(key) }}</td>
+              <td>${{ (quantity * getPrice(key)).toFixed(2) }}</td>
               <td class="center">
                 <button @click="remove(key)" class="btn btn-light cart-remove">
                   &times;
@@ -60,11 +60,12 @@ export default {
       return product.price.USD
     },
     calculateTotal () {
-      const total = Object.entries(this.cart).reduce((acc, curr) => {
+      // eslint-disable-next-line no-unused-vars
+      const total = Object.entries(this.cart).reduce((acc, curr, index) => {
         return acc + (curr[1] * this.getPrice(curr[0]))
       }, 0)
       return total.toFixed(2)
-    }
+    },
   }
 }
 </script>
